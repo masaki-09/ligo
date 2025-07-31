@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "start": "node index.js"
-},
+    "start": "node index.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -13,6 +13,7 @@
     "cheerio": "^1.1.2",
     "discord.js": "^14.21.0",
     "dotenv": "^17.2.1",
+    "express": "^5.1.0",
     "kafkajs": "^2.2.4",
     "lowdb": "^1.0.0",
     "node-fetch": "^2.7.0"
