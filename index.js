@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
-const express = require('express'); // ★ Webサーバー機能を追加
+const express = require('express');
 
 // --- 設定項目 ---
 const TOKEN = process.env.DISCORD_BOT_TOKEN;
@@ -72,7 +72,7 @@ async function checkForNewEvents() {
             if (channel) {
                 const embed = new EmbedBuilder()
                     .setColor(0x0099ff)
-                    .setTitle(`� 重力波イベント速報: ${eventId}`)
+                    .setTitle(`🚨 重力波イベント速報: ${eventId}`)
                     .setURL(eventUrl)
                     .addFields(
                         { name: '到来時刻 (UTC)', value: arrivalTime, inline: true },
@@ -102,22 +102,16 @@ client.on('ready', () => {
     setInterval(checkForNewEvents, CHECK_INTERVAL_MINUTES * 60 * 1000);
 });
 
-// --- ★★★ ここからが新しい部分 ★★★ ---
-
-// 1. Webサーバーのセットアップ
+// --- Webサーバーのセットアップ ---
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// サイトのURLにアクセスがあった場合に、ボットが動いていることを知らせる
 app.get('/', (req, res) => {
   res.send('重力波Discordボットは正常に稼働中です。');
 });
 
-// 2. Webサーバーを起動
 app.listen(PORT, () => {
   console.log(`Webサーバーがポート ${PORT} で起動しました。Discordボットの起動準備をします...`);
   
-  // 3. Webサーバーが起動してから、Discordボットにログイン
   client.login(TOKEN);
 });
-�
